@@ -58,7 +58,7 @@
           <td>{{ user.username }}</td>
           <td>{{ user.email }}</td>
           <td>
-            {% for ac in user.customuser.accesslevels.all %}
+            {% for ac in user.customfield.accesslevels.all %}
               {% include 'gp_admins/subpages/_accesslevel.html' with data=ac.name %}
             {% empty %}
               <small>NONE</small>
@@ -113,7 +113,7 @@
                           </div>
                           <div>
                             <h6>Access Levels:</h6>
-                            {% for ac in user.customuser.accesslevels.all %}
+                            {% for ac in user.customfield.accesslevels.all %}
                               {% include 'gp_admins/subpages/_accesslevel.html' with data=ac.name %}
                             {% empty %}
                               <small>NONE</small>

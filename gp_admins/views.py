@@ -7,6 +7,8 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import cache_control, never_cache
 from django.views.decorators.http import require_http_methods, require_GET, require_POST
 from django.utils.decorators import method_decorator
+from django.contrib import messages
+from django.http import HttpResponseRedirect
 
 from django.contrib.auth.models import User
 from .models import AccessLevel
@@ -127,14 +129,15 @@ class EditUserView(View):
 
         if user_form.is_valid() and custom_user_edit_form.is_valid():
             if user_form.save():
-
-                # Update access levels of this user
                 old_accesslevels = user.customfield.accesslevels.all()
-                user.customfield.accesslevels.remove( *old_accesslevels )
-                new_accesslevels = list(custom_user_edit_form.cleaned_data.get('accesslevels'))
-                user.customfield.accesslevels.add( *new_accesslevels )
 
-                messages.success(request, 'Success! The information of {0} (CWL: {1}) has been updated'.format(user.get_full_name(), user.username))
+                # To check wheter access levels of this user should be updated or not
+                if api.check_two_querysets_equal(old_accesslevels, custom_user_edit_form.cleaned_data.get('accesslevels')) == False:
+                    user.customfield.accesslevels.remove( *old_accesslevels ) # Remove current access levels
+                    new_accesslevels = list( custom_user_edit_form.cleaned_data.get('accesslevels') )
+                    user.customfield.accesslevels.add( *new_accesslevels ) # Add new roles
+
+                messages.success(request, 'Success! The user information of {0} has been updated'.format(user.get_full_name()))
             else:
                 messages.error(request, 'An error occurred while updating an User Form.')
         else:

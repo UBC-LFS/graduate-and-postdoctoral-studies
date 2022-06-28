@@ -93,6 +93,39 @@ def get_accesslevel_by_id(accesslevel_id):
         raise Http404
 
 
+def check_two_querysets_equal(qs1, qs2):
+    ''' Helper funtion: To check whether two querysets are equal or not '''
+    if len(qs1) != len(qs2):
+        return False
+    
+    d = dict()
+    for qs in qs1:
+        item = qs.name.lower()
+        if item in d.keys(): d[item] += 1
+        else: d[item] = 1
+    
+    for qs in qs2:
+        item = qs.name.lower()
+        if item in d.keys(): d[item] += 1
+        else: d[item] = 1
+
+    for k, v in d.items():
+        if v != 2: return False
+    return True
+
+
+def update_user_access_levels(profile, old_roles, data):
+    ''' Update access levels of a user '''
+    
+    if check_two_querysets_equal( old_roles, data.get('roles') ) == False:
+        profile.roles.remove( *old_roles ) # Remove current roles
+        new_roles = list( data.get('roles') )
+        profile.roles.add( *new_roles )  # Add new roles
+    
+    return True if profile.roles else False
+
+
+
 # Application
 
 def add_app_info_into_application(app, list):
