@@ -1,0 +1,44 @@
+[
+  {
+    "model": "gp_admins.customfield",
+    "pk": 1, "fields": {
+      "user_id": 1
+    }
+  },
+  {
+    "model": "gp_admins.customfield",
+    "pk": 2, "fields": {
+      "user_id": 2
+    }
+  },
+  {
+    "model": "gp_admins.customfield",
+    "pk": 3, "fields": {
+      "user_id": 3
+    }
+  },
+  {
+    "model": "gp_admins.customfield",
+    "pk": 4, "fields": {
+      "user_id": 4
+    }
+  },
+  {
+    "model": "gp_admins.customfield",
+    "pk": 5, "fields": {
+      "user_id": 5
+    }
+  },
+  {
+    "model": "gp_admins.customfield",
+    "pk": 6, "fields": {
+      "user_id": 6
+    }
+  },
+  {
+    "model": "gp_admins.customfield",
+    "pk": 7, "fields": {
+      "user_id": 7
+    }
+  }
+]

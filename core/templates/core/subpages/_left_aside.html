@@ -10,7 +10,7 @@
         <p>{{ data.username }}</p>
 
         {% for ac in data.customuser.accesslevels.all %}
-          {% include 'ta_award/subpages/_accesslevel.html' with data=ac.name %}
+          {% include 'gp_admins/subpages/_accesslevel.html' with data=ac.name %}
         {% empty %}
           None
         {% endfor %}

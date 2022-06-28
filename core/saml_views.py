@@ -10,7 +10,7 @@ from onelogin.saml2.settings import OneLogin_Saml2_Settings
 from onelogin.saml2.utils import OneLogin_Saml2_Utils
 
 from accounts import views as accountView
-from ta_award import api
+from gp_admins import api
 
 def init_saml_auth(req):
     return OneLogin_Saml2_Auth(req, custom_base_path=settings.SAML_FOLDER)

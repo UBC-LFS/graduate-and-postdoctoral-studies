@@ -7,16 +7,16 @@ from django.views.decorators.http import require_http_methods, require_GET, requ
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
 
-from ta_award.models import AccessLevel
-from ta_award.forms import LocalLoginForm
-from ta_award import api
+from gp_admins.models import AccessLevel
+from gp_admins.forms import LocalLoginForm
+from gp_admins import api
 
 
 def redirect_to_index_page(accesslevels):
     ''' Redirect to an index page given roles '''
     if 'Admin' in accesslevels or 'Manager' in accesslevels:
-        return '/ta-award/home/'
-    return '/ta-award/stu/'
+        return '/adm/home/'
+    return '/stu/home/'
 
 
 @require_http_methods(['GET'])

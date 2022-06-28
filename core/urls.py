@@ -21,11 +21,11 @@ from . import views, saml_views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    # path('ta-award/stu/', include('ta_award_students.urls')),
-    path('ta-award/', include('ta_award.urls')),
-    # path('accounts/', include('accounts.urls')),
+    path('stu/', include('gp_students.urls')),
+    path('adm/', include('gp_admins.urls')),
+    path('accounts/', include('accounts.urls')),
 
-    # path('saml/', saml_views.saml, name='saml'),
+    path('saml/', saml_views.saml, name='saml'),
     # path('admin/', admin.site.urls)
 ]
 

@@ -7,7 +7,7 @@ from django.urls import resolve
 from django.http import Http404
 from django.contrib import messages
 
-from ta_award import api
+from gp_admins import api
 
 
 def admin_access_only(view_func):

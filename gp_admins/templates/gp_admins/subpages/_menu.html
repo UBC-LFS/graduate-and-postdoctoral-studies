@@ -1,0 +1,22 @@
+<nav class="container menu">
+  <div class="dropdown">
+    <a class="btn dropdown-item" href="{% url 'gp_admins:index' %}">Home</a>
+  </div>
+  <div class="dropdown">
+    <a class="btn dropdown-item" href="{% url 'gp_admins:get_accepted_apps' %}">Accpeted Applications</a>
+  </div>
+
+  {% if 'Admin' in user_accesslevels %}
+    <div class="dropdown">
+      <button class="btn btn-sm btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Admin Menu
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="{% url 'gp_admins:get_users' %}">Users</a>
+        <a class="dropdown-item" href="{% url 'gp_admins:get_accesslevels' %}">Access Levels</a>
+      </div>
+    </div>
+  {% endif %}
+</nav>
+
+{% include 'core/subpages/_return_messages.html' with data=messages %}

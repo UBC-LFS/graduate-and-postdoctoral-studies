@@ -1,0 +1,80 @@
+{% extends 'core/base.html' %}
+{% block content %}
+
+{% include 'gp_admins/subpages/_menu.html' %}
+
+<div class="container max-width-container">
+  {% include 'core/subpages/_header.html' with title='Edit User' %}
+
+  <div class="row">
+    <div class="col-md-4">
+      {% include 'core/subpages/_left_aside.html' with data=user %}
+
+      <div class="left-aside-btn-groups">
+        <a class="btn btn-outline-primary" href="{{ request.GET.next }}">Back to Users</a>
+      </div>
+    </div>
+
+    <div class="col-md-8">
+
+      <div class="board">
+        <h3>User Edit Form</h3>
+
+        <div class="bg-white border p-3">
+          <ul class="text-dark mb-0">
+            <li>All required fields must be filled. (<small class="text-danger"><i class="fa fa-asterisk" aria-hidden="true"></i></small>: This field is required)</li>
+          </ul>
+        </div>
+
+        <form action="" method="post">
+          {% csrf_token %}
+
+          {% for field in user_form.visible_fields  %}
+            <div class="field-wrapper">
+              <label for="{{ field.id_for_label }}">
+                {{ field.label }}:
+                {% if field.name == 'first_name' or field.name == 'last_name' or field.name == 'email' or field.name == 'username' %}
+                  <small class="text-danger"><i class="fa fa-asterisk" aria-hidden="true"></i></small>
+                {% endif %}
+              </label>
+              {% if field.help_text %}
+                <div class="help">{{ field.help_text|safe }}</div>
+              {% endif %}
+              {{ field }}
+            </div>
+          {% endfor %}
+
+          {% for field in custom_user_edit_form.visible_fields  %}
+            <div class="field-wrapper">
+              <label for="{{ field.id_for_label }}">
+                {{ field.label }}:
+                {% if field.name == 'accesslevels' %}
+                  <small class="text-danger"><i class="fa fa-asterisk" aria-hidden="true"></i></small>
+                {% endif %}
+              </label>
+              {% if field.help_text %}
+                <div class="help">{{ field.help_text|safe }}</div>
+              {% endif %}
+              {{ field }}
+            </div>
+          {% endfor %}
+
+          {% for field in user_profile_form.hidden_fields %}
+            {{ field }}
+          {% endfor %}
+
+          <input type="hidden" name="user" value="{{ user.id }}" />
+          <input type="hidden" name="next" value="{{ request.GET.next }}" />
+
+          <a class="btn btn-outline-secondary" href="{{ request.GET.next }}">Cancel</a>
+          <input class="btn btn-primary" type="submit" value="Update" />
+        </form>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}

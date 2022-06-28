@@ -1,0 +1,26 @@
+[
+  {
+    "model": "gp_admins.accesslevel",
+    "pk": 1,
+    "fields": {
+      "name": "Admin",
+      "slug": "admin"
+    }
+  },
+  {
+    "model": "gp_admins.accesslevel",
+    "pk": 2,
+    "fields": {
+      "name": "Manager",
+      "slug": "manager"
+    }
+  },
+  {
+    "model": "gp_admins.accesslevel",
+    "pk": 3,
+    "fields": {
+      "name": "Student",
+      "slug": "student"
+    }
+  }
+]
