@@ -2,6 +2,19 @@
   <div class="dropdown">
     <a class="btn dropdown-item" href="{% url 'gp_admins:index' %}">Home</a>
   </div>
+
+  <div class="dropdown">
+    <button class="btn btn-sm btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      TA Award Forms
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" href="#">Graduate Teaching Award</a>
+      <a class="dropdown-item" href="#">Major Award</a>
+      <a class="dropdown-item" href="#">Four Year Doctoral Fellowship (4YF)</a>
+      <a class="dropdown-item" href="#">Graduate Student Travel Award (GSTA)</a>
+    </div>
+  </div>
+
   <div class="dropdown">
     <a class="btn dropdown-item" href="{% url 'gp_admins:get_accepted_apps' %}">Accpeted Applications</a>
   </div>
