@@ -1,0 +1,51 @@
+[
+  {
+    "model": "ta_award.customuser_accesslevels",
+    "pk": 1, "fields": {
+      "customuser_id": 1,
+      "accesslevel_id": 1
+    }
+  },
+  {
+    "model": "ta_award.customuser_accesslevels",
+    "pk": 2, "fields": {
+      "customuser_id": 2,
+      "accesslevel_id": 2
+    }
+  },
+  {
+    "model": "ta_award.customuser_accesslevels",
+    "pk": 3, "fields": {
+      "customuser_id": 3,
+      "accesslevel_id": 2
+    }
+  },
+  {
+    "model": "ta_award.customuser_accesslevels",
+    "pk": 4, "fields": {
+      "customuser_id": 4,
+      "accesslevel_id": 3
+    }
+  },
+  {
+    "model": "ta_award.customuser_accesslevels",
+    "pk": 5, "fields": {
+      "customuser_id": 5,
+      "accesslevel_id": 3
+    }
+  },
+  {
+    "model": "ta_award.customuser_accesslevels",
+    "pk": 6, "fields": {
+      "customuser_id": 6,
+      "accesslevel_id": 3
+    }
+  },
+  {
+    "model": "ta_award.customuser_accesslevels",
+    "pk": 7, "fields": {
+      "customuser_id": 7,
+      "accesslevel_id": 3
+    }
+  }
+]

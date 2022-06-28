@@ -1,0 +1,156 @@
+{% extends 'core/base.html' %}
+{% block content %}
+
+{% include 'ta_award/subpages/_menu.html' %}
+
+<div class="container max-width-container">
+  <div class="row bg-light-gray">
+    <div class="col-md-2">
+      {% include 'core/subpages/_header.html' with type='wide' title='Users' %}
+    </div>
+    <div class="col-md-10">
+      <div class="search-field p-3 fs-sm">
+        <form method="GET">
+          <input type="text" name="first_name" value="{{ request.GET.first_name }}" placeholder="First Name" /> and
+          <input type="text" name="last_name" value="{{ request.GET.last_name }}" placeholder="Last Name" /> and
+          <input type="text" name="cwl" value="{{ request.GET.cwl }}" placeholder="CWL" />
+
+          <div class="mt-2">
+            <button class="btn btn-sm fs-xs btn-primary" type="submit">Search</button>
+            <a class="btn btn-sm fs-xs btn-secondary" href="{% url 'ta_award:get_users' %}">Clear</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  {% include 'core/subpages/_searched_message.html' with items=users total_items=total_users %}
+
+  <table
+    class="table table-bordered table-hover table-striped table-responsive-md text-center table-vertical-middle fs-xs"
+    data-toggle="table"
+    data-sortable="true"
+    data-classes=""
+    data-show-export="true"
+    data-show-columns="true"
+    data-export-types="['csv']"
+  >
+    <thead>
+      <tr>
+        <th data-sortable="true">User<br /> ID</th>
+        <th data-sortable="true">First<br /> Name</th>
+        <th data-sortable="true">Last<br /> Name</th>
+        <th>CWL</th>
+        <th>E-mail</th>
+        <th data-sortable="true">Access <br /> Levels</th>
+        <th data-sortable="true">Superuser <br /> Status</th>
+        <th data-sortable="true">Last Login</th>
+        <th>Active</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+        <tr>
+          <td>{{ user.id }}</td>
+          <td>{{ user.first_name }}</td>
+          <td>{{ user.last_name }}</td>
+          <td>{{ user.username }}</td>
+          <td>{{ user.email }}</td>
+          <td>
+            {% for ac in user.customuser.accesslevels.all %}
+              {% include 'ta_award/subpages/_accesslevel.html' with data=ac.name %}
+            {% empty %}
+              <small>NONE</small>
+            {% endfor %}
+          </td>
+          <td>
+            {% if user.is_superuser %}
+              <i class="fa fa-check-circle text-chocolate font-size-1 vertical-middle" aria-hidden="true"></i>
+            {% endif %}
+          </td>
+          <td>
+            <span class="fs-xs">
+              {% if user.last_login %}
+                <span class="d-none">{{ user.last_login|date:"Y m d z" }}</span>
+                {{ user.last_login|date:"N j, Y" }}<br />
+                {{ user.last_login|date:"g:i a" }}
+              {% else %}
+                None
+              {% endif %}
+            <span>
+          </td>
+          <td>
+            {% if user.is_active %}
+              <i class="fa fa-check text-success fs-1 vertical-middle" aria-hidden="true"></i>
+            {% endif %}
+          </td>
+          <td>
+            <div class="btn-toolbar">
+              <a class="btn btn-xs btn-link fs-sm mr-2" href="{% url 'ta_award:edit_user' username=user.username %}?next={{ request.get_full_path }}">Edit</a>
+
+              {% comment %}
+              <button class="btn btn-xs btn-danger fs-sm" type="button" data-toggle="modal" data-target="#user-delete-modal-{{ user.id }}">Delete</button>
+
+              <div class="modal fade" id="user-delete-modal-{{ user.id }}" tabindex="-1" role="dialog" aria-labelledby="user-delete-modal-label-{{ user.id }}" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="user-delete-modal-label-{{ user.id }}">Delete User</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="modal-item text-left">
+
+                        <div class="bg-light p-3">
+                          <div>
+                            <h6>Full Name:</h6>
+                            {{ user.get_full_name }}
+                          </div>
+                          <div>
+                            <h6>CWL:</h6>
+                            {{ user.username }}
+                          </div>
+                          <div>
+                            <h6>Access Levels:</h6>
+                            {% for ac in user.customuser.accesslevels.all %}
+                              {% include 'ta_award/subpages/_accesslevel.html' with data=ac.name %}
+                            {% empty %}
+                              <small>NONE</small>
+                            {% endfor %}
+                          </div>
+                        </div>
+
+                        <div class="text-center">
+                          <h5 class="text-danger my-4">Are you sure to delete this user?</h5>
+
+                          <form action="#" method="post">
+                            {% csrf_token %}
+
+                            <input type="hidden" name="user" value="{{ user.id }}" />
+                            <input type="hidden" name="next" value="{{ request.get_full_path }}" />
+
+                            <a class="btn btn-outline-secondary" href="{{ request.get_full_path }}">Cancel</a>
+                            <input class="btn btn-danger" type="submit" value="Delete" />
+                          </form>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endcomment %}
+
+            </div>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  {% include 'core/subpages/_table_paginator.html' with data=users %}
+
+</div>
+
+{% endblock %}

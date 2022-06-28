@@ -1,0 +1,26 @@
+[
+  {
+    "model": "ta_award.accesslevel",
+    "pk": 1,
+    "fields": {
+      "name": "Admin",
+      "slug": "admin"
+    }
+  },
+  {
+    "model": "ta_award.accesslevel",
+    "pk": 2,
+    "fields": {
+      "name": "Manager",
+      "slug": "manager"
+    }
+  },
+  {
+    "model": "ta_award.accesslevel",
+    "pk": 3,
+    "fields": {
+      "name": "Student",
+      "slug": "student"
+    }
+  }
+]

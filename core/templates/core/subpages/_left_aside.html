@@ -1,0 +1,20 @@
+{% load static %}
+
+<aside class="col-10 mx-auto">
+  <div class="left-content">
+    <img class="img-profile img-fluid" src="{% static 'images/user.png' %}" alt="avatar-placeholder" />
+
+    <div class="bg-prompt">
+      <div class="prompt p-3 mb-4">
+        <h5>{{ data.get_full_name }}</h5>
+        <p>{{ data.username }}</p>
+
+        {% for ac in data.customuser.accesslevels.all %}
+          {% include 'ta_award/subpages/_accesslevel.html' with data=ac.name %}
+        {% empty %}
+          None
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</aside>

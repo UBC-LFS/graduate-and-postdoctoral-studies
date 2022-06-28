@@ -1,0 +1,14 @@
+{% load static %}
+
+{% if 'Admin' in user_accesslevels %}
+  <p><a href="{% url 'admin:index' %}">Go to Administrator Home</a></p>
+
+{% elif 'Manger' in user_accesslevels %}
+  <p><a href="{% url 'manager:index' %}">Go to Manager Home</a></p>
+
+{% elif 'Student' in user_accesslevels %}
+  <p><a href="{% url 'stu:index' %}">Go to Student Home</a></p>
+
+{% endif %}
+
+<img class="mt-7 d-block mx-auto" src="{% static 'images/bee-gd6e90ff25_640.png' %}" width=200 alt="bumble-bee"/>

@@ -1,0 +1,84 @@
+[
+  {
+    "model": "auth.user",
+    "pk": 1, "fields": {
+      "password": "pbkdf2_sha256$150000$o40PKWhQTyaC$8LXfzmFRqlwYH0C2ckjaQfAiYeDy3BKWeBYLerdTiDs=",
+      "username": "djangouser1.admin",
+      "first_name": "DjangoUser1",
+      "last_name": "Admin",
+      "email": "djangouser1.admin@example.com",
+      "is_superuser": true
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 2, "fields": {
+      "password": "pbkdf2_sha256$150000$o40PKWhQTyaC$8LXfzmFRqlwYH0C2ckjaQfAiYeDy3BKWeBYLerdTiDs=",
+      "username": "djangouser2.mgr",
+      "first_name": "DjangoUser2",
+      "last_name": "Manager",
+      "email": "djangouser2.mgr@example.com",
+      "is_superuser": true
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 3,
+    "fields": {
+      "password": "pbkdf2_sha256$150000$o40PKWhQTyaC$8LXfzmFRqlwYH0C2ckjaQfAiYeDy3BKWeBYLerdTiDs=",
+      "username": "djangouser3.mgr",
+      "first_name": "DjangoUser3",
+      "last_name": "Manager",
+      "email": "djangouser3.mgr@example.com",
+      "is_superuser": false
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 4,
+    "fields": {
+      "password": "pbkdf2_sha256$150000$o40PKWhQTyaC$8LXfzmFRqlwYH0C2ckjaQfAiYeDy3BKWeBYLerdTiDs=",
+      "username": "djangouser4.stu",
+      "first_name": "DjangoUser4",
+      "last_name": "Student",
+      "email": "djangouser4.stu@example.com",
+      "is_superuser": false
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 5,
+    "fields": {
+      "password": "pbkdf2_sha256$150000$o40PKWhQTyaC$8LXfzmFRqlwYH0C2ckjaQfAiYeDy3BKWeBYLerdTiDs=",
+      "username": "djangouser5.stu",
+      "first_name": "DjangoUser5",
+      "last_name": "Student",
+      "email": "djangouser5.stu@example.com",
+      "is_superuser": false
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 6,
+    "fields": {
+      "password": "pbkdf2_sha256$150000$o40PKWhQTyaC$8LXfzmFRqlwYH0C2ckjaQfAiYeDy3BKWeBYLerdTiDs=",
+      "username": "djangouser6.stu",
+      "first_name": "DjangoUser6",
+      "last_name": "Student",
+      "email": "djangouser6.stu@example.com",
+      "is_superuser": false
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 7, "fields": {
+      "password": "pbkdf2_sha256$150000$o40PKWhQTyaC$8LXfzmFRqlwYH0C2ckjaQfAiYeDy3BKWeBYLerdTiDs=",
+      "username": "djangouser7.stu",
+      "first_name": "DjangoUser7",
+      "last_name": "Student",
+      "email": "djangouser7.stu@example.com",
+      "is_superuser": false,
+      "is_active": false
+    }
+  }
+]

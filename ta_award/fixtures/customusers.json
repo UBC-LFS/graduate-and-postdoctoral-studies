@@ -1,0 +1,44 @@
+[
+  {
+    "model": "ta_award.customuser",
+    "pk": 1, "fields": {
+      "user_id": 1
+    }
+  },
+  {
+    "model": "ta_award.customuser",
+    "pk": 2, "fields": {
+      "user_id": 2
+    }
+  },
+  {
+    "model": "ta_award.customuser",
+    "pk": 3, "fields": {
+      "user_id": 3
+    }
+  },
+  {
+    "model": "ta_award.customuser",
+    "pk": 4, "fields": {
+      "user_id": 4
+    }
+  },
+  {
+    "model": "ta_award.customuser",
+    "pk": 5, "fields": {
+      "user_id": 5
+    }
+  },
+  {
+    "model": "ta_award.customuser",
+    "pk": 6, "fields": {
+      "user_id": 6
+    }
+  },
+  {
+    "model": "ta_award.customuser",
+    "pk": 7, "fields": {
+      "user_id": 7
+    }
+  }
+]
