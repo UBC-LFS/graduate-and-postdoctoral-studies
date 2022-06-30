@@ -1,0 +1,18 @@
+<nav class="container menu">
+    <div class="dropdown">
+      <a class="btn dropdown-item" href="{% url 'gp_supervisors:index' %}">Home</a>
+    </div>
+    
+    <div class="dropdown">
+      <button class="btn btn-sm btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Program Groups
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="#">aa</a>
+      </div>
+    </div>
+  
+  </nav>
+  
+  {% include 'core/subpages/_return_messages.html' with data=messages %}
+  

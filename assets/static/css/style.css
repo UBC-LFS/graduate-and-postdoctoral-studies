@@ -40,6 +40,10 @@ main {
   flex: 1 0 auto;
 }
 
+.current-view > .active {
+  display: block !important;
+}
+
 .max-width-container {
   margin-top: 3rem;
 }

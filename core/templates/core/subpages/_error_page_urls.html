@@ -1,10 +1,10 @@
 {% load static %}
 
 {% if 'Superadmin' in user_accesslevels or 'Admin' in user_accesslevels %}
-  <p><a href="{% url 'gp_admins:index' %}">Go to Administrator Home</a></p>
+  <p><a href="{% url 'gp_admins:index' %}">Go to Admin Home</a></p>
 
 {% elif 'Supervisor' in user_accesslevels %}
-  <p><a href="#">Go to Manager Home</a></p>
+  <p><a href="{% url 'gp_supervisors:index' %}">Go to Supervisor Home</a></p>
 
 {% elif 'Student' in user_accesslevels %}
   <p><a href="{% url 'gp_students:index' %}">Go to Student Home</a></p>

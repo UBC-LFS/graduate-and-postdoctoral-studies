@@ -30,6 +30,11 @@
 							<li class="nav-item dropdown">
 								<a class="dropdown-toggle text-white ml-4" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
 									Current View
+									(<div class="d-inline-block current-view">
+										<span id="view-adm" class="d-none">Admin</span>
+										<span id="view-sup" class="d-none">Supervisor</span>
+										<span id="view-stu" class="d-none">Student</span>
+									</div>)
 								</a>
 								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 									{% if 'Superadmin' in user_accesslevels or 'Admin' in user_accesslevels %}
@@ -37,7 +42,7 @@
 									{% endif %}
 
 									{% if 'Supervisor' in user_accesslevels %}
-										<a id="nav-sup" class="dropdown-item" href="#">Supervisor</a>
+										<a id="nav-sup" class="dropdown-item" href="{% url 'gp_supervisors:index' %}">Supervisor</a>
 									{% endif %}
 
 									{% if 'Student' in user_accesslevels %}
