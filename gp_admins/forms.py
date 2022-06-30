@@ -1,7 +1,7 @@
 from django import forms
 
 from django.contrib.auth.models import User
-from .models import AccessLevel, CustomField
+from .models import *
 
 
 class LocalLoginForm(forms.Form):
@@ -19,18 +19,6 @@ class LocalLoginForm(forms.Form):
             'placeholder': 'Enter'
         })
     )
-
-
-class AccessLevelForm(forms.ModelForm):
-    class Meta:
-        model = AccessLevel
-        fields = ['name']
-        widgets = {
-            'name': forms.TextInput(attrs={ 'class': 'form-control' })
-        }
-        help_texts = {
-            'name': 'This field is unique. Maximum characters is 20.'
-        }
 
 
 class UserForm(forms.ModelForm):
@@ -71,14 +59,47 @@ class CustomFieldForm(forms.ModelForm):
 
 
 class CustomFieldEditForm(forms.ModelForm):
+    programgroups = forms.ModelMultipleChoiceField(
+        required=True,
+        queryset=ProgramGroup.objects.all(),
+        label='Program Groups',
+        widget=forms.CheckboxSelectMultiple()
+    )
     accesslevels = forms.ModelMultipleChoiceField(
         required=True,
         queryset=AccessLevel.objects.all(),
+        label='Acess Levels',
         widget=forms.CheckboxSelectMultiple()
     )
     class Meta:
         model = CustomField
-        fields = ['user', 'accesslevels']
+        fields = ['user', 'programgroups', 'accesslevels']
         widgets = {
             'user': forms.HiddenInput()
+        }
+
+
+class ProgramGroupForm(forms.ModelForm):
+    class Meta:
+        model = ProgramGroup
+        fields = ['name', 'code']
+        widgets = {
+            'name': forms.TextInput(attrs={ 'class': 'form-control' }),
+            'code': forms.TextInput(attrs={ 'class': 'form-control' })
+        }
+        help_texts = {
+            'name': 'This field is unique. Maximum characters is 100.',
+            'code': 'This field is unique. Maximum characters is 20.'
+        }
+
+
+class AccessLevelForm(forms.ModelForm):
+    class Meta:
+        model = AccessLevel
+        fields = ['name']
+        widgets = {
+            'name': forms.TextInput(attrs={ 'class': 'form-control' })
+        }
+        help_texts = {
+            'name': 'This field is unique. Maximum characters is 20.'
         }

@@ -117,15 +117,17 @@ def saml(request, action=None):
 
                 if 'RelayState' in req['post_data'] and OneLogin_Saml2_Utils.get_self_url(req) != req['post_data']['RelayState']:
                     #return HttpResponseRedirect(auth.redirect_to(req['post_data']['RelayState']))
-                    roles = userApi.get_user_roles(user)
-                    request.session['loggedin_user'] = {
-                        'id': user.id,
-                        'username': user.username,
-                        'roles': roles
-                    }
-                    redirect_to = accountView.redirect_to_index_page(roles)
-                    return HttpResponseRedirect(redirect_to)
-
+                    accesslevels = api.get_user_accesslevels(user)
+                    if len(accesslevels) == 0:
+                        print('An error occurred. Users must have at least one access level.')
+                    else:
+                        request.session['loggedin_user'] = {
+                            'id': user.id,
+                            'username': user.username,
+                            'accesslevels': accesslevels
+                        }
+                        redirect_to = accountView.redirect_to_index_page(roles)
+                        return HttpResponseRedirect(redirect_to)
                 else:
                     for attr_name in request.session['samlUserdata'].keys():
                         print('%s ==> %s' % (attr_name, '|| '.join(request.session['samlUserdata'][attr_name])))

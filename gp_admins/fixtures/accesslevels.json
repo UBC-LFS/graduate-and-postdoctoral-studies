@@ -3,21 +3,29 @@
     "model": "gp_admins.accesslevel",
     "pk": 1,
     "fields": {
-      "name": "Admin",
-      "slug": "admin"
+      "name": "Superadmin",
+      "slug": "superadmin"
     }
   },
   {
     "model": "gp_admins.accesslevel",
     "pk": 2,
     "fields": {
-      "name": "Manager",
-      "slug": "manager"
+      "name": "Admin",
+      "slug": "admin"
     }
   },
   {
     "model": "gp_admins.accesslevel",
     "pk": 3,
+    "fields": {
+      "name": "Supervisor",
+      "slug": "supervisor"
+    }
+  },
+  {
+    "model": "gp_admins.accesslevel",
+    "pk": 4,
     "fields": {
       "name": "Student",
       "slug": "student"

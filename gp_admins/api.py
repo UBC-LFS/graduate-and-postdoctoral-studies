@@ -2,24 +2,13 @@ from django.db.models import Q
 from django.http import Http404
 
 from django.contrib.auth.models import User
-from .models import AccessLevel, CustomField
 from administrators.models import Application, ApplicationStatus
-from .forms import CustomFieldForm
+from .models import *
+from .forms import *
 
 
-def get_user_accesslevels(user):
-    ''' Add accesslevels into an user '''
-
-    accesslevels = []
-    for al in user.customfield.accesslevels.all():
-        if al.name == AccessLevel.ADMIN:
-            accesslevels.append(AccessLevel.ADMIN)
-        elif al.name == AccessLevel.MANAGER:
-            accesslevels.append(AccessLevel.MANAGER)
-        elif al.name == AccessLevel.STUDENT:
-            accesslevels.append(AccessLevel.STUDENT)
-    return ', '.join(accesslevels)
-
+def get_users():
+    return User.objects.using('default').all().order_by('last_name', 'first_name')
 
 def get_user_by_id(user_id):
     try:
@@ -40,8 +29,8 @@ def is_user_active(username):
     return user.is_active
 
 
-def has_custom_user_created(user):
-    ''' Check an user has a custom user object '''
+def has_customfield_created(user):
+    ''' Check an user has a custom field object '''
     try:
         return True
     except CustomField.DoesNotExist:
@@ -53,9 +42,9 @@ def user_exists(user_data):
     found_user = User.objects.using('default').filter(username=user_data['username'])
     if found_user.exists():
         user = found_user.first()
-        if not has_custom_user_created(user):
-            create_CustomField(user)
-        return user
+        if not has_customfield_created(user):
+            if create_CustomField(user):
+                return user
     return None
 
 
@@ -69,61 +58,60 @@ def create_user(user_data):
     )
     user.set_unusable_password()
     if user:
-        create_CustomField(user)
-        return user
+        if create_CustomField(user):
+            return user
     return False
 
 
 def create_customfield(user):
     ''' Create an user's member '''
-    guest_accesslevel = AccessLevel.objects.using('default').filter(name='Guest').first()
+    student_accesslevel = AccessLevel.objects.using('default').filter(name='Student').first()
 
-    custom_user_form = CustomFieldForm({ 'accesslevels': [guest_accesslevel.id] })
+    customfield_form = CustomFieldForm({ 'accesslevels': [student_accesslevel.id] })
     if custom_user_form.is_valid():
-        custom_user = CustomField.objects.using('default').create(user_id=user.id)
-        custom_user.accesslevels.add( *custom_user_form.cleaned_data['accesslevels'] )
+        customfield = CustomField.objects.using('default').create(user_id=user.id)
+        customfield.accesslevels.add( *customfield_form.cleaned_data['accesslevels'] )
         return True
     return False
 
 
-def get_accesslevel_by_id(accesslevel_id):
+# Program Group
+
+def get_programgroups():
+    return ProgramGroup.objects.using('default').all()
+
+def get_programgroup_by_id(pg_id):
     try:
-        return AccessLevel.objects.using('default').get(id=accesslevel_id)
-    except AccessLevel.DoesNotExist:
+        return ProgramGroup.objects.using('default').get(id=pg_id)
+    except ProgramGroup.DoesNotExist:
         raise Http404
 
 
-def check_two_querysets_equal(qs1, qs2):
-    ''' Helper funtion: To check whether two querysets are equal or not '''
-    if len(qs1) != len(qs2):
-        return False
-    
-    d = dict()
-    for qs in qs1:
-        item = qs.name.lower()
-        if item in d.keys(): d[item] += 1
-        else: d[item] = 1
-    
-    for qs in qs2:
-        item = qs.name.lower()
-        if item in d.keys(): d[item] += 1
-        else: d[item] = 1
+# Access Level
 
-    for k, v in d.items():
-        if v != 2: return False
-    return True
+def get_user_accesslevels(user):
+    ''' Add accesslevels into an user '''
 
+    accesslevels = []
+    for al in user.customfield.accesslevels.all():
+        if al.name == AccessLevel.SUPERADMIN:
+            accesslevels.append(AccessLevel.SUPERADMIN)
+        elif al.name == AccessLevel.ADMIN:
+            accesslevels.append(AccessLevel.ADMIN)
+        elif al.name == AccessLevel.SUPERVISOR:
+            accesslevels.append(AccessLevel.SUPERVISOR)
+        elif al.name == AccessLevel.STUDENT:
+            accesslevels.append(AccessLevel.STUDENT)
+    return ', '.join(accesslevels)
 
-def update_user_access_levels(profile, old_roles, data):
-    ''' Update access levels of a user '''
-    
-    if check_two_querysets_equal( old_roles, data.get('roles') ) == False:
-        profile.roles.remove( *old_roles ) # Remove current roles
-        new_roles = list( data.get('roles') )
-        profile.roles.add( *new_roles )  # Add new roles
-    
-    return True if profile.roles else False
+def get_accesslevels():
+    return AccessLevel.objects.using('default').all()
 
+def get_accesslevel_by_id(al_id):
+    try:
+        return AccessLevel.objects.using('default').get(id=al_id)
+    except AccessLevel.DoesNotExist:
+        raise Http404
 
 
 # Application
@@ -149,3 +137,27 @@ def get_filtered_accepted_apps():
             excluded_ids.append(ret_app.id)
 
     return apps.exclude(id__in=excluded_ids)
+
+
+# Helper function
+
+
+def check_two_querysets_equal(qs1, qs2):
+    ''' Helper funtion: To check whether two querysets are equal or not '''
+    if len(qs1) != len(qs2):
+        return False
+
+    d = dict()
+    for qs in qs1:
+        item = qs.name.lower()
+        if item in d.keys(): d[item] += 1
+        else: d[item] = 1
+
+    for qs in qs2:
+        item = qs.name.lower()
+        if item in d.keys(): d[item] += 1
+        else: d[item] = 1
+
+    for k, v in d.items():
+        if v != 2: return False
+    return True

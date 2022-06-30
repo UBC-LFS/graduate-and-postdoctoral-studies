@@ -19,14 +19,18 @@
     </div>
   </div>
 
-  {% if 'Admin' in user_accesslevels %}
+  {% if 'Superadmin' in user_accesslevels or 'Admin' in user_accesslevels %}
     <div class="dropdown">
       <button class="btn btn-sm btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Admin Menu
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <a class="dropdown-item" href="{% url 'gp_admins:get_users' %}">Users</a>
-        <a class="dropdown-item" href="{% url 'gp_admins:get_accesslevels' %}">Access Levels</a>
+        <a class="dropdown-item" href="{% url 'gp_admins:get_programgroups' %}">Program Groups</a>
+
+        {% if 'Superadmin' in user_accesslevels %}
+          <a class="dropdown-item" href="{% url 'gp_admins:get_accesslevels' %}">Access Levels</a>
+        {% endif %}
       </div>
     </div>
   {% endif %}

@@ -20,13 +20,35 @@
 				<span class="navbar-brand">LFS Graduate & Postdoctoral Studies</span>
 
 				{% if request.user.is_authenticated %}
+
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon"></span>
 					</button>
 
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+						<ul class="navbar-nav mr-auto">
+							<li class="nav-item dropdown">
+								<a class="dropdown-toggle text-white ml-4" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+									Current View
+								</a>
+								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+									{% if 'Superadmin' in user_accesslevels or 'Admin' in user_accesslevels %}
+										<a id="nav-adm" class="dropdown-item" href="{% url 'gp_admins:index' %}">Admin</a>
+									{% endif %}
+
+									{% if 'Supervisor' in user_accesslevels %}
+										<a id="nav-sup" class="dropdown-item" href="#">Supervisor</a>
+									{% endif %}
+
+									{% if 'Student' in user_accesslevels %}
+										<a id="nav-stu" class="dropdown-item" href="{% url 'gp_students:index' %}">Student</a>
+									{% endif %}
+								</div>
+							</li>
+						</ul>
+
 						<div class="ml-auto">
-							<span class="text-white">Hi, {{ request.user.get_full_name }} ({{ user_accesslevels }})</span>
+							<span class="text-white">Hi, {{ request.user.get_full_name }}</span>
 							<a id="btn-logout" class="text-white ml-4" href="#">
 								Log out
 								<i class="fa fa-sign-out" aria-hidden="true"></i>

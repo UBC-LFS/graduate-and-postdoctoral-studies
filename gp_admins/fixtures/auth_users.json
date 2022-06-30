@@ -3,10 +3,10 @@
     "model": "auth.user",
     "pk": 1, "fields": {
       "password": "pbkdf2_sha256$150000$o40PKWhQTyaC$8LXfzmFRqlwYH0C2ckjaQfAiYeDy3BKWeBYLerdTiDs=",
-      "username": "djangouser1.admin",
+      "username": "djangouser1.adm",
       "first_name": "DjangoUser1",
-      "last_name": "Admin",
-      "email": "djangouser1.admin@example.com",
+      "last_name": "Superadmin",
+      "email": "djangouser1.adm@example.com",
       "is_superuser": true
     }
   },
@@ -14,10 +14,10 @@
     "model": "auth.user",
     "pk": 2, "fields": {
       "password": "pbkdf2_sha256$150000$o40PKWhQTyaC$8LXfzmFRqlwYH0C2ckjaQfAiYeDy3BKWeBYLerdTiDs=",
-      "username": "djangouser2.mgr",
+      "username": "djangouser2.adm",
       "first_name": "DjangoUser2",
-      "last_name": "Manager",
-      "email": "djangouser2.mgr@example.com",
+      "last_name": "Admin",
+      "email": "djangouser2.adm@example.com",
       "is_superuser": true
     }
   },
@@ -26,10 +26,10 @@
     "pk": 3,
     "fields": {
       "password": "pbkdf2_sha256$150000$o40PKWhQTyaC$8LXfzmFRqlwYH0C2ckjaQfAiYeDy3BKWeBYLerdTiDs=",
-      "username": "djangouser3.mgr",
+      "username": "djangouser3.sup",
       "first_name": "DjangoUser3",
-      "last_name": "Manager",
-      "email": "djangouser3.mgr@example.com",
+      "last_name": "Supervisor",
+      "email": "djangouser3.sup@example.com",
       "is_superuser": false
     }
   },
@@ -38,10 +38,10 @@
     "pk": 4,
     "fields": {
       "password": "pbkdf2_sha256$150000$o40PKWhQTyaC$8LXfzmFRqlwYH0C2ckjaQfAiYeDy3BKWeBYLerdTiDs=",
-      "username": "djangouser4.stu",
+      "username": "djangouser4.sup",
       "first_name": "DjangoUser4",
-      "last_name": "Student",
-      "email": "djangouser4.stu@example.com",
+      "last_name": "Supervisor",
+      "email": "djangouser4.sup@example.com",
       "is_superuser": false
     }
   },

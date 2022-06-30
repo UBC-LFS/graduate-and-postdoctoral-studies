@@ -14,8 +14,10 @@ from gp_admins import api
 
 def redirect_to_index_page(accesslevels):
     ''' Redirect to an index page given roles '''
-    if 'Admin' in accesslevels or 'Manager' in accesslevels:
+    if 'Superadmin' in accesslevels or 'Admin' in accesslevels:
         return '/adm/home/'
+    elif 'Supervisor' in accesslevels:
+        return '/sup/home/'
     return '/stu/home/'
 
 

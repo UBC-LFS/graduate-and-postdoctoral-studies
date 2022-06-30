@@ -10,20 +10,40 @@ from django.contrib import messages
 from gp_admins import api
 
 
-def admin_access_only(view_func):
-    ''' Only admins can access '''
+def superadmin_access_only(view_func):
+    ''' Only superadmins can access '''
     def wrap(request, *args, **kwargs):
-        if request.user.is_authenticated and request.user.is_active and request.user.is_superuser and 'Admin' in request.session['loggedin_user']['accesslevels']:
+        if request.user.is_authenticated and request.user.is_active and request.user.is_superuser and 'Superadmin' in request.session['loggedin_user']['accesslevels']:
             return view_func(request, *args, **kwargs)
         else:
             raise PermissionDenied
     return wrap
 
 
-def admin_manager_access_only(view_func):
-    ''' Only admins and managers can access '''
+def admin_access_only(view_func):
+    ''' Only admins can access '''
     def wrap(request, *args, **kwargs):
-        if request.user.is_authenticated and request.user.is_active and ('Admin' in request.session['loggedin_user']['accesslevels'] or 'Manager' in request.session['loggedin_user']['accesslevels']):
+        if request.user.is_authenticated and request.user.is_active and ('Superadmin' in request.session['loggedin_user']['accesslevels'] or 'Admin' in request.session['loggedin_user']['accesslevels']):
+            return view_func(request, *args, **kwargs)
+        else:
+            raise PermissionDenied
+    return wrap
+
+
+def supervisor_access_only(view_func):
+    ''' Only supervisors can access '''
+    def wrap(request, *args, **kwargs):
+        if request.user.is_authenticated and request.user.is_active and 'Supervisor' in request.session['loggedin_user']['accesslevels']:
+            return view_func(request, *args, **kwargs)
+        else:
+            raise PermissionDenied
+    return wrap
+
+
+def student_access_only(view_func):
+    ''' Only students can access '''
+    def wrap(request, *args, **kwargs):
+        if request.user.is_authenticated and request.user.is_active and 'Student' in request.session['loggedin_user']['accesslevels']:
             return view_func(request, *args, **kwargs)
         else:
             raise PermissionDenied

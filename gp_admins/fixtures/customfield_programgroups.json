@@ -1,0 +1,23 @@
+[
+  {
+    "model": "gp_admins.customfield_programgroups",
+    "pk": 1, "fields": {
+      "customfield_id": 3,
+      "programgroup_id": 1
+    }
+  },
+  {
+    "model": "gp_admins.customfield_programgroups",
+    "pk": 2, "fields": {
+      "customfield_id": 4,
+      "programgroup_id": 2
+    }
+  },
+  {
+    "model": "gp_admins.customfield_programgroups",
+    "pk": 3, "fields": {
+      "customfield_id": 3,
+      "programgroup_id": 5
+    }
+  }
+]

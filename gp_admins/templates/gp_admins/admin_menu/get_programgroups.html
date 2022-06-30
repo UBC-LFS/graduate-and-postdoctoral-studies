@@ -4,13 +4,13 @@
 {% include 'gp_admins/subpages/_menu.html' %}
 
 <div class="container mt-5 px-0">
-  {% include 'core/subpages/_header.html' with title='Access Levels' total=accesslevels|length %}
+  {% include 'core/subpages/_header.html' with title='Supervisors' total=programgroups|length %}
 
   <div class="row">
     <div class="col-md-5">
       <div class="bg-prompt">
         <div class="prompt p-4 mb-4">
-          <h4>Create Access Level</h4>
+          <h4>Create Program Group</h4>
 
           <form action="" method="post">
             {% csrf_token %}
@@ -43,39 +43,47 @@
           <tr>
             <th>ID</th>
             <th>Name</th>
+            <th>Code</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          {% for ac in accesslevels %}
+          {% for pg in programgroups %}
             <tr>
-              <td>{{ ac.id }}</td>
-              <td>{{ ac.name }}</td>
+              <td>{{ pg.id }}</td>
+              <td>{{ pg.name }}</td>
+              <td>{{ pg.code }}</td>
               <td>
                 <div class="btn-toolbar">
-                  <button class="btn btn-xs btn-primary mr-2" type="button" data-toggle="modal" data-target="#access-level-edit-modal-{{ ac.id }}">Edit</button>
+                  <button class="btn btn-xs btn-primary mr-2" type="button" data-toggle="modal" data-target="#programgroup-edit-modal-{{ pg.id }}">Edit</button>
 
-                  <div class="modal fade" id="access-level-edit-modal-{{ ac.id }}" tabindex="-1" role="dialog" aria-labelledby="access-level-edit-modal-label-{{ ac.id }}" aria-hidden="true">
+                  <div class="modal fade" id="programgroup-edit-modal-{{ pg.id }}" tabindex="-1" role="dialog" aria-labelledby="programgroup-edit-modal-label-{{ pg.id }}" aria-hidden="true">
                     <div class="modal-dialog modal-lg" role="document">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title" id="access-level-edit-modal-label-{{ code.id }}">Edit Access Level</h5>
+                          <h5 class="modal-title" id="programgroup-edit-modal-label-{{ code.id }}">Edit Program Group</h5>
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         </div>
                         <div class="modal-body text-left">
                           <div class="modal-item">
-                            <h4>Access Level Edit Form</h4>
+                            <h4>Program Group Edit Form</h4>
 
-                            <form action="{% url 'gp_admins:edit_accesslevel' ac.id %}" method="post">
+                            <form action="{% url 'gp_admins:edit_programgroup' pg.id %}" method="post">
                               {% csrf_token %}
 
                               <div class="field-wrapper">
-                                <label for="id_name_{{ ac.id }}">Name:</label>
-                                <div class="help">Maximum characters: 20</div>
-                                <input id="id_name_{{ ac.id }}" type="text" name="name" maxlength="5" value="{{ ac.name }}" class="form-control" />
+                                <label for="id_name_{{ pg.id }}">Name:</label>
+                                <div class="help">Maximum characters: 100</div>
+                                <input id="id_name_{{ pg.id }}" type="text" name="name" maxlength="100" value="{{ pg.name }}" class="form-control" />
                               </div>
 
-                              <input class="btn btn-primary" type="submit" value="Update Access Level" />
+                              <div class="field-wrapper">
+                                <label for="id_code_{{ pg.id }}">Code:</label>
+                                <div class="help">Maximum characters: 20</div>
+                                <input id="id_code_{{ pg.id }}" type="text" name="code" maxlength="20" value="{{ pg.code }}" class="form-control" />
+                              </div>
+
+                              <input class="btn btn-primary" type="submit" value="Update Program Group" />
                             </form>
                           </div>
                         </div>
@@ -83,9 +91,9 @@
                     </div>
                   </div>
 
-                  <form action="{% url 'gp_admins:delete_accesslevel' %}" method="post" onsubmit="return confirm('Are you sure to delete this course code - {{ ac.name }} ?')">
+                  <form action="{% url 'gp_admins:delete_programgroup' %}" method="post" onsubmit="return confirm('Are you sure to delete this program group - {{ pg.name }} ?')">
                     {% csrf_token %}
-                    <input type="hidden" name="accesslevel" value="{{ ac.id }}" />
+                    <input type="hidden" name="programgroup" value="{{ pg.id }}" />
                     <input class="btn btn-xs btn-danger" type="submit" value="Delete" />
                   </form>
                 </div>

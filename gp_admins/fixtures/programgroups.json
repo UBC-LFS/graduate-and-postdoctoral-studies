@@ -1,0 +1,56 @@
+[
+    {
+        "model": "gp_admins.programgroup",
+        "pk": 1,
+        "fields": {
+            "name": "Program Group A",
+            "code": "PGA",
+            "slug": "program-group-a"
+        }
+    },
+    {
+        "model": "gp_admins.programgroup",
+        "pk": 2,
+        "fields": {
+            "name": "Program Group B",
+            "code": "PGB",
+            "slug": "program-group-b"
+        }
+    },
+    {
+        "model": "gp_admins.programgroup",
+        "pk": 3,
+        "fields": {
+            "name": "Program Group C",
+            "code": "PGC",
+            "slug": "program-group-c"
+        }
+    },
+    {
+        "model": "gp_admins.programgroup",
+        "pk": 4,
+        "fields": {
+            "name": "Program Group D",
+            "code": "PGD",
+            "slug": "program-group-d"
+        }
+    },
+    {
+        "model": "gp_admins.programgroup",
+        "pk": 5,
+        "fields": {
+            "name": "Program Group E",
+            "code": "PGE",
+            "slug": "program-group-e"
+        }
+    },
+    {
+        "model": "gp_admins.programgroup",
+        "pk": 6,
+        "fields": {
+            "name": "Program Group F",
+            "code": "PGF",
+            "slug": "program-group-f"
+        }
+    }
+]
